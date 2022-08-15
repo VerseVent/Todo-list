@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>TODO</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <h1 class="todoTitle" :style="{ color: titleColor }">TODO</h1>
+        <form @submit.prevent="addItem">
+          <input type="text" v-model="currentItem" />
+          <button class="addTaskBtn" type="submit" @keydown.enter="addItem">
+            Add task
+          </button>
+        </form>
+        <ul class="todoList" v-if="todoList.length">
+          <li
+            class="todoItem"
+            v-for="(todoItem, index) in todoList"
+            :key="'li' + index"
+          >
+            <h2 :class="{ done: todoItem.isDone }" @click="deleteItem(index)">
+              {{ todoItem.task }}
+            </h2>
+            <input type="checkbox" @click="setDone(index)" />
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
